@@ -7,8 +7,8 @@ import (
 	"runtime"
 	"syscall"
 
-	"github.com/shohinsan/services/foundation/logger"
-	"github.com/shohinsan/services/foundation/web"
+	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
+	"github.com/shohinsan/SaleSphereAPI/foundation/web"
 )
 
 /* Polymorphism means that a piece of code
