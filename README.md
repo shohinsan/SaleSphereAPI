@@ -1,4 +1,4 @@
-# SaleSphereAPI
+![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/ad4a1c47-cc26-4635-bbb1-c4bece178864)# SaleSphereAPI
 
 ## Install
 
@@ -10,7 +10,7 @@
 
 * Dependencies in `go.mod` 
 
-## Steps I have taken
+## Steps
 
 Kind creates a cluster named "sale-sphere-cluster" using the specified image (kindest/node:v1.29.2) and configuration file (zarf/k8s/dev/kind-config.yaml).
 
@@ -25,3 +25,22 @@ Various steps are performed during cluster creation:
 * Installing the Container Network Interface (CNI).
 * Installing the StorageClass.
 * After successful cluster creation, the kubectl context is set to "kind-sale-sphere-cluster", allowing interaction with the newly created cluster.
+
+![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/48093425-4963-412b-9981-c9920da1bfad)
+
+This log shows the execution of the `make all` command, which typically builds and prepares various components of a project. Here's a breakdown of the steps:
+
+Docker builds an image using the provided Dockerfile (zarf/docker/Dockerfile.service).
+* The image is tagged as shohinsan/salesphereapi/sales-api:0.0.1.
+* During the build process, the following arguments are passed:
+* BUILD_REF: Set to 0.0.1.
+* BUILD_DATE: Set to the current date and time in UTC format (%Y-%m-%dT%H:%M:%SZ).
+
+The build process includes several stages:
+* Loading the base image (docker.io/library/alpine:3.19.1) and build image (docker.io/library/golang:1.22.1).
+* Transferring the build context.
+* Resolving and extracting dependencies.
+* Setting up user and directory permissions.
+* Copying files from the local directory to the Docker image.
+* Setting the working directory within the image.
+* Compiling the Go application (go build).
