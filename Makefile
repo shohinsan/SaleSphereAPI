@@ -8,14 +8,17 @@ SHELL = $(if $(wildcard $(SHELL_PATH)),/bin/ash,/bin/bash)
 
 GOLANG          := golang:1.22.1
 KIND            := kindest/node:v1.29.2
-KIND_CLUSTER    := sale-sphere-cluster
 POSTGRES        := postgres:16.2
-BASE_IMAGE_NAME := shohinsan/salesphereapi
+
+KIND_CLUSTER    := sale-sphere-cluster
+NAMESPACE       := sales-system
+APP             := sales
+
+BASE_IMAGE_NAME := localhost/shohinsan/salesphereapi
 SERVICE_NAME    := sales-api
 VERSION         := 0.0.1
+
 SERVICE_IMAGE   := $(BASE_IMAGE_NAME)/$(SERVICE_NAME):$(VERSION)
-DRIVER 			:= app/services/sales-api/main.go
-PRETTYLOG 		:= app/tooling/logfmt/main.go	
 
 # example:  VERSION  	 := "0.0.1-$(shell git rev-parse --short HEAD)" tied to repository
 
@@ -24,7 +27,7 @@ PRETTYLOG 		:= app/tooling/logfmt/main.go
 # Define targets
 
 run: 
-	go run $(DRIVER) | go run $(PRETTYLOG)
+	go run app/services/sales-api/main.go | go run app/tooling/logfmt/main.go
 
 tidy-up:
 	go mod tidy
@@ -51,6 +54,31 @@ dev-status-all:
 dev-status:
 	watch -n 2 kubectl get pods -o wide --all-namespaces
 
+# ------------------------------------------------------------------------------
+
+dev-load:
+	kind load docker-image $(SERVICE_IMAGE) --name $(KIND_CLUSTER)
+
+dev-apply:
+	kustomize build zarf/k8s/dev/sales | kubectl apply -f -
+	kubectl wait pods --namespace=$(NAMESPACE) --selector app=$(APP) --timeout=120s --for=condition=Ready
+
+dev-logs:
+	kubectl logs --namespace=$(NAMESPACE) -l app=$(APP) --all-containers=true -f --tail=100 --max-log-requests=6 | go run app/tooling/logfmt/main.go -service=$(SERVICE_NAME)
+
+dev-describe-deployment:
+	kubectl describe deployment --namespace=$(NAMESPACE) $(APP)
+
+dev-describe-sales:
+	kubectl describe pod --namespace=$(NAMESPACE) -l app=$(APP)
+
+dev-restart:
+	kubectl rollout restart deployment $(APP) --namespace=$(NAMESPACE)
+
+dev-update: all dev-load dev-restart
+
+dev-update-apply: all dev-load dev-apply
+	
 # ==============================================================================
 # Building containers 
 
