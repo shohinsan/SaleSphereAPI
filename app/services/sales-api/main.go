@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"errors"
-	_ "expvar"
 	"fmt"
 	"net/http"
 	"os"
