@@ -33,3 +33,6 @@ In the build progression, we initiate by establishing the foundational environme
 
 Upon invoking "make dev-status-all" command, the current status of the development environment is queried using various Kubernetes commands. Specifically, "kubectl get pods -o wide --watch --all-namespaces" command retrieves the status of all pods across namespaces. However, to focus solely on the "sales-system" namespace, we need to filter the results. Ensuring that only pods within the "sales-system" namespace are considered, it is observed that the pod named "sales-5bc95c6f54-cs2l9" is indeed running, indicating the successful functioning of the "sales-system" components.
 
+![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/6ae63b8a-b003-4292-bc1e-2be9b6a930f5)
+
+Resource limits for CPU and memory are set to ensure efficient operation. The bottom line of this thorough examination is not to run more threads than we have cores in order to run as efficiently as possible.
