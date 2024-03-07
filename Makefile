@@ -22,16 +22,6 @@ SERVICE_IMAGE   := $(BASE_IMAGE_NAME)/$(SERVICE_NAME):$(VERSION)
 
 # example:  VERSION  	 := "0.0.1-$(shell git rev-parse --short HEAD)" tied to repository
 
-
-# ==============================================================================
-# Define targets
-
-run: 
-	go run app/services/sales-api/main.go | go run app/tooling/logfmt/main.go
-
-tidy-up:
-	go mod tidy
-
 # ==============================================================================
 # Running from within k8s/kind
 
@@ -100,3 +90,43 @@ service:
 # 		--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 # 		.
 
+# ==============================================================================
+# General
+
+run: 
+	go run app/services/sales-api/main.go | go run app/tooling/logfmt/main.go
+
+run-help:
+	go run app/services/sales-api/main.go --help | go run app/tooling/logfmt/main.go
+	
+# ==============================================================================
+# Modules support
+
+deps-reset:
+	git checkout -- go.mod
+	go mod tidy
+	go mod vendor
+
+tidy:
+	go mod tidy
+	go mod vendor
+
+deps-list:
+	go list -m -u -mod=readonly all
+
+deps-upgrade:
+	go get -u -v ./...
+	go mod tidy
+	go mod vendor
+
+deps-cleancache:
+	go clean -modcache
+
+list:
+	go list -mod=mod all
+
+# ==============================================================================
+# Metrics and Tracing
+
+metrics-view-sc:
+	expvarmon -ports="localhost:4000" -vars="build,requests,goroutines,errors,panics,mem:memstats.Alloc"
