@@ -28,3 +28,8 @@ Using Docker, I construct an image based on the provided Dockerfile located at z
 * BUILD_DATE is established as the present date and time in UTC format (%Y-%m-%dT%H:%M:%SZ).
 
 In the build progression, we initiate by establishing the foundational environment, loading essential base and build images such as alpine:3.19.1 and golang:1.22.1 respectively. Following this, we seamlessly integrate required files and configurations by transferring the build context, ensuring all necessary dependencies are resolved and extracted. Security measures are implemented by configuring user and directory permissions within the image. We then copy pertinent local files into the Docker image, facilitating runtime accessibility. Specifying the working directory within the image streamlines operations. Finally, the Go application undergoes compilation using the "go build" command, transforming it into an executable within the Docker environment.
+
+![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/d9ed9f6d-1c73-4bc2-83d6-7e4b26f99d4a)
+
+Upon invoking "make dev-status-all" command, the current status of the development environment is queried using various Kubernetes commands. Specifically, "kubectl get pods -o wide --watch --all-namespaces" command retrieves the status of all pods across namespaces. However, to focus solely on the "sales-system" namespace, we need to filter the results. Ensuring that only pods within the "sales-system" namespace are considered, it is observed that the pod named "sales-5bc95c6f54-cs2l9" is indeed running, indicating the successful functioning of the "sales-system" components.
+
