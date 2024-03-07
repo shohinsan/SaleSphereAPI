@@ -41,3 +41,7 @@ Resource limits for CPU and memory are set to ensure efficient operation. The bo
 ![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/675df309-f7bb-4116-a47c-6d55a6eef347)
 
 This is just a beginning, but I was able to install and run an interesting monitoring tool `expvarmon` that watches every 5 seconds. Funny enough, with that you will be able to run monitoring tests at the airplane without an internet if you are coding out there. 
+
+![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/07d22698-51e1-4174-a2a4-36b870bb5523)
+
+Upon executing the "make curl" command, a cURL request is made to http://localhost:3000/hack, resulting in an HTTP response with a status code of 200 OK. The response includes a content type of text/plain and a content length of 16 bytes. This successful response indicates that the specified endpoint is accessible and responsive within the application environment.
