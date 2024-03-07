@@ -5,6 +5,7 @@
 * https://kustomize.io/
 * https://kubernetes.io/docs/tasks/tools/
 * https://kind.sigs.k8s.io/
+* go install github.com/divan/expvarmon@latest
 
 ## Upgrade/Increment to Latest Stable Version 
 
@@ -36,3 +37,7 @@ Upon invoking "make dev-status-all" command, the current status of the developme
 ![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/6ae63b8a-b003-4292-bc1e-2be9b6a930f5)
 
 Resource limits for CPU and memory are set to ensure efficient operation. The bottom line of this thorough examination is not to run more threads than we have cores in order to run as efficiently as possible.
+
+![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/675df309-f7bb-4116-a47c-6d55a6eef347)
+
+This is just a beginning, but I was able to install and run an interesting monitoring tool `expvarmon` that watches every 5 seconds. Funny enough, with that you will be able to run monitoring tests at the airplane without an internet if you are coding out there. 
