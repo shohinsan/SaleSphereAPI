@@ -9,8 +9,9 @@
 
 ## Upgrade/Increment to Latest Stable Version 
 
-* Dependencies in `go.mod`
+* run `make deps-upgrade`
 * Makefile
+* Dockerfile
 
 ## Steps
 

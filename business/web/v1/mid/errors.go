@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/shohinsan/SaleSphereAPI/business/web/v1/auth"
 	"github.com/shohinsan/SaleSphereAPI/business/web/v1/response"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
 	"github.com/shohinsan/SaleSphereAPI/foundation/web"
@@ -29,6 +30,13 @@ func Errors(log *logger.Logger) web.Middleware {
 						Error: reqErr.Error(),
 					}
 					status = reqErr.Status
+
+				case auth.IsAuthError(err):
+					er = response.ErrorDocument{
+						Error: http.StatusText(http.StatusUnauthorized),
+					}
+					status = http.StatusUnauthorized
+
 				default:
 					er = response.ErrorDocument{
 						Error: http.StatusText(http.StatusInternalServerError),
