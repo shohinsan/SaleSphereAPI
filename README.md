@@ -46,3 +46,7 @@ This is just a beginning, but I was able to install and run an interesting monit
 ![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/07d22698-51e1-4174-a2a4-36b870bb5523)
 
 Upon executing the "make curl" command, a cURL request is made to http://localhost:3000/hack, resulting in an HTTP response with a status code of 200 OK. The response includes a content type of text/plain and a content length of 16 bytes. This successful response indicates that the specified endpoint is accessible and responsive within the application environment.
+
+![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/1b4a3532-3b50-42af-8fbe-7c1f37ba6807)
+
+Learning Rego, the policy language used in Open Policy Agent (OPA), proved to be challenging yet rewarding. Despite its steep learning curve, understanding Rego's syntax and semantics allowed for fine-grained control over policy enforcement within the system. I implemented and verified JSON Web Tokens (JWT) using this technology.
