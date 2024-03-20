@@ -1,5 +1,5 @@
 # Build the Go Binary.
-FROM golang:1.22.1 as build_metrics
+FROM golang:1.22 as build_metrics
 ENV CGO_ENABLED 0
 ARG BUILD_REF
 
@@ -12,28 +12,28 @@ ARG BUILD_REF
 # RUN go mod download
 
 # Copy the source code into the container.
-COPY . /service
+COPY . /salesphereapi
 
 # Build the service binary. We are doing this last since this will be different
 # every time we run through this process.
-WORKDIR /service/app/services/metrics
+WORKDIR /salesphereapi/app/services/metrics
 RUN go build -ldflags "-X main.build=${BUILD_REF}"
 
 
 # Run the Go Binary in Alpine.
-FROM alpine:3.19.1
+FROM alpine:3.19
 ARG BUILD_DATE
 ARG BUILD_REF
 RUN addgroup -g 1000 -S metrics && \
-    adduser -u 1000 -h /service -G metrics -S metrics
-COPY --from=build_metrics --chown=metrics:metrics /service/app/services/metrics/metrics /service/metrics
-WORKDIR /service
+    adduser -u 1000 -h /salesphereapi -G metrics -S metrics
+COPY --from=build_metrics --chown=metrics:metrics /salesphereapi/app/services/metrics/metrics /service/metrics
+WORKDIR /salesphereapi
 USER metrics
 CMD ["./metrics"]
 
 LABEL org.opencontainers.image.created="${BUILD_DATE}" \
-      org.opencontainers.image.title="sales-api" \
+      org.opencontainers.image.title="metrics" \
       org.opencontainers.image.authors="Shohin Abdulkhamidov <abd.shohin@gmail.com>" \
-      org.opencontainers.image.source="https://github.com/shohinsan/SaleSphereAPI/blob/main/app/services/sales-api" \
+      org.opencontainers.image.source="https://github.com/shohinsan/SaleSphereAPI/tree/master/app/services/metrics" \
       org.opencontainers.image.revision="${BUILD_REF}" \
-      org.opencontainers.image.vendor="InsidiouS"
+      org.opencontainers.image.vendor="Insidious Labs"

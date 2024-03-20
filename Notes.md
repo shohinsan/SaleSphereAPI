@@ -1,4 +1,3 @@
-
 Polymorphism means that a piece of code
 changes its behavior solely depending upon
 the concrete data it is operating on.

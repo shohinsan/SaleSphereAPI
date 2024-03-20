@@ -34,8 +34,7 @@ func toRecord(r slog.Record) Record {
 		return true
 	}
 	r.Attrs(f)
-	// value semantics, everybody gets
-	// their own copy of it for the slog record
+
 	return Record{
 		Time:       r.Time,
 		Message:    r.Message,

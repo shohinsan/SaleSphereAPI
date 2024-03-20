@@ -11,8 +11,10 @@ import (
 
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/google/uuid"
+	"github.com/jmoiron/sqlx"
 	"github.com/open-policy-agent/opa/rego"
-	"github.com/shohinsan/SaleSphereAPI/business/core/user"
+	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user"
+	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user/stores/userdb"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
 )
 
@@ -46,6 +48,7 @@ type KeyLookup interface {
 // Config represents information required to initialize auth.
 type Config struct {
 	Log       *logger.Logger
+	DB        *sqlx.DB
 	KeyLookup KeyLookup
 	Issuer    string
 }
@@ -66,6 +69,9 @@ func New(cfg Config) (*Auth, error) {
 	// If a database connection is not provided, we won't perform the
 	// user enabled check.
 	var usrCore *user.Core
+	if cfg.DB != nil {
+		usrCore = user.NewCore(cfg.Log, nil, userdb.NewStore(cfg.Log, cfg.DB))
+	}
 
 	a := Auth{
 		keyLookup: cfg.KeyLookup,

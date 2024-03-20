@@ -9,7 +9,7 @@ import (
 )
 
 // Metrics updates program counters.
-func Metrics() web.Middleware {
+func Metrics() web.MidHandler {
 	m := func(handler web.Handler) web.Handler {
 		h := func(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
 			ctx = metrics.Set(ctx)

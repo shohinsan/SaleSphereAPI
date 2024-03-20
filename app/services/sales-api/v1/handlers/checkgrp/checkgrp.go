@@ -8,6 +8,8 @@ import (
 	"runtime"
 	"time"
 
+	"github.com/jmoiron/sqlx"
+	"github.com/shohinsan/SaleSphereAPI/business/data/sqldb"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
 	"github.com/shohinsan/SaleSphereAPI/foundation/web"
 )
@@ -15,11 +17,13 @@ import (
 type handlers struct {
 	build string
 	log   *logger.Logger
+	db    *sqlx.DB
 }
 
-func new(build string, log *logger.Logger) *handlers {
+func new(build string, log *logger.Logger, db *sqlx.DB) *handlers {
 	return &handlers{
 		build: build,
+		db:    db,
 		log:   log,
 	}
 }
@@ -33,6 +37,11 @@ func (h *handlers) readiness(ctx context.Context, w http.ResponseWriter, r *http
 
 	status := "ok"
 	statusCode := http.StatusOK
+	if err := sqldb.StatusCheck(ctx, h.db); err != nil {
+		status = "db not ready"
+		statusCode = http.StatusInternalServerError
+		h.log.Info(ctx, "readiness failure", "status", status)
+	}
 
 	data := struct {
 		Status string `json:"status"`

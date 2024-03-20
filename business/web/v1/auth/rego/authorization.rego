@@ -1,6 +1,7 @@
 package shohinsan.rego
 
-import rego.v1
+import future.keywords.if
+import future.keywords.in
 
 default rule_any := false
 

@@ -15,7 +15,7 @@ const (
 
 // Package name of our rego code.
 const (
-	opaPackage string = "shohinsan.rego"
+	opaPackage string = "ardan.rego"
 )
 
 // Core OPA policies.

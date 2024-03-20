@@ -11,12 +11,9 @@ import (
 )
 
 // Logger writes information about the request to the logs.
-func Logger(log *logger.Logger) web.Middleware {
-
+func Logger(log *logger.Logger) web.MidHandler {
 	m := func(handler web.Handler) web.Handler {
-
 		h := func(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
-
 			v := web.GetValues(ctx)
 
 			path := r.URL.Path
@@ -28,12 +25,14 @@ func Logger(log *logger.Logger) web.Middleware {
 
 			err := handler(ctx, w, r)
 
-			log.Info(ctx, "request completed", "method", r.Method, "path", path, "remoteaddr", r.RemoteAddr, "statusCode", v.StatusCode, "since", time.Since(v.Now))
+			log.Info(ctx, "request completed", "method", r.Method, "path", path, "remoteaddr", r.RemoteAddr,
+				"statuscode", v.StatusCode, "since", time.Since(v.Now).String())
 
 			return err
 		}
-		return h
 
+		return h
 	}
+
 	return m
 }
