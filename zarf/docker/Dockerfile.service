@@ -29,9 +29,9 @@ ARG BUILD_DATE
 ARG BUILD_REF
 RUN addgroup -g 1000 -S sales && \
     adduser -u 1000 -h /salesphereapi -G sales -S sales
-COPY --from=build_sales-api --chown=sales:sales /salesphereapi/zarf/keys/. /service/zarf/keys/.
-COPY --from=build_sales-api --chown=sales:sales /salesphereapi/app/tooling/sales-admin/sales-admin /service/sales-admin
-COPY --from=build_sales-api --chown=sales:sales /salesphereapi/app/services/sales-api/sales-api /service/sales-api
+COPY --from=build_sales-api --chown=sales:sales /salesphereapi/zarf/keys/. /salesphereapi/zarf/keys/.
+COPY --from=build_sales-api --chown=sales:sales /salesphereapi/app/tooling/sales-admin/sales-admin /salesphereapi/sales-admin
+COPY --from=build_sales-api --chown=sales:sales /salesphereapi/app/services/sales-api/sales-api /salesphereapi/sales-api
 WORKDIR /salesphereapi
 USER sales
 CMD ["./sales-api"]

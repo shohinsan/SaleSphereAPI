@@ -26,14 +26,14 @@ ARG BUILD_DATE
 ARG BUILD_REF
 RUN addgroup -g 1000 -S metrics && \
     adduser -u 1000 -h /salesphereapi -G metrics -S metrics
-COPY --from=build_metrics --chown=metrics:metrics /salesphereapi/app/services/metrics/metrics /service/metrics
+COPY --from=build_metrics --chown=metrics:metrics /salesphereapi/app/services/metrics/metrics /salesphereapi/metrics
 WORKDIR /salesphereapi
 USER metrics
 CMD ["./metrics"]
 
 LABEL org.opencontainers.image.created="${BUILD_DATE}" \
-      org.opencontainers.image.title="metrics" \
-      org.opencontainers.image.authors="Shohin Abdulkhamidov <abd.shohin@gmail.com>" \
-      org.opencontainers.image.source="https://github.com/shohinsan/SaleSphereAPI/tree/master/app/services/metrics" \
-      org.opencontainers.image.revision="${BUILD_REF}" \
-      org.opencontainers.image.vendor="Insidious Labs"
+    org.opencontainers.image.title="metrics" \
+    org.opencontainers.image.authors="Shohin Abdulkhamidov <abd.shohin@gmail.com>" \
+    org.opencontainers.image.source="https://github.com/shohinsan/SaleSphereAPI/tree/master/app/services/metrics" \
+    org.opencontainers.image.revision="${BUILD_REF}" \
+    org.opencontainers.image.vendor="Insidious Labs"
