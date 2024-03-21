@@ -50,3 +50,7 @@ Upon executing the "make curl" command, a cURL request is made to http://localho
 ![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/1b4a3532-3b50-42af-8fbe-7c1f37ba6807)
 
 Learning Rego, the policy language used in Open Policy Agent (OPA), proved to be challenging yet rewarding. Despite its steep learning curve, understanding Rego's syntax and semantics allowed for fine-grained control over policy enforcement within the system. I implemented and verified JSON Web Tokens (JWT) using this technology.
+
+![image](https://github.com/shohinsan/SaleSphereAPI/assets/22685770/bfb9a3c6-d090-4df7-b185-1dc546367c59)
+
+Added Open-Telemetry using Promtail/Loki/Tempo for Grafana to see 3 different logs such as "logs", "metrics", and "traces"
