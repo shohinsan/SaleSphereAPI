@@ -3,8 +3,8 @@ package productdb
 import (
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/product"
+	"github.com/google/uuid"
 )
 
 type dbProduct struct {

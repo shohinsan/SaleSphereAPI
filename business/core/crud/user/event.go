@@ -3,9 +3,9 @@ package user
 import (
 	"fmt"
 
+	"github.com/shohinsan/SaleSphereAPI/business/core/crud/delegate"
 	"github.com/go-json-experiment/json"
 	"github.com/google/uuid"
-	"github.com/shohinsan/SaleSphereAPI/business/core/crud/delegate"
 )
 
 // Domain represents the name of this domain.

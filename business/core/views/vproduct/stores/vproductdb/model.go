@@ -3,8 +3,8 @@ package vproductdb
 import (
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/shohinsan/SaleSphereAPI/business/core/views/vproduct"
+	"github.com/google/uuid"
 )
 
 type dbProduct struct {

@@ -9,10 +9,10 @@ import (
 	"os"
 
 	"github.com/ardanlabs/conf/v3"
-	"github.com/google/uuid"
 	"github.com/shohinsan/SaleSphereAPI/app/tooling/sales-admin/commands"
 	"github.com/shohinsan/SaleSphereAPI/business/data/sqldb"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
+	"github.com/google/uuid"
 )
 
 var build = "develop"

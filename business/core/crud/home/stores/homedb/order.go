@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/home"
-	"github.com/shohinsan/SaleSphereAPI/business/web/v1/order"
+	"github.com/shohinsan/SaleSphereAPI/business/web/order"
 )
 
 var orderByFields = map[string]string{

@@ -9,12 +9,12 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/delegate"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user"
 	"github.com/shohinsan/SaleSphereAPI/business/data/transaction"
-	"github.com/shohinsan/SaleSphereAPI/business/web/v1/order"
+	"github.com/shohinsan/SaleSphereAPI/business/web/order"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
+	"github.com/google/uuid"
 )
 
 // Set of error variables for CRUD operations.

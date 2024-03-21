@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/shohinsan/SaleSphereAPI/business/core/event"
-	"github.com/shohinsan/SaleSphereAPI/business/web/v1/order"
+	"github.com/shohinsan/SaleSphereAPI/business/web/order"
 	"github.com/shohinsan/SaleSphereAPI/business/data/transaction"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
 	"github.com/google/uuid"

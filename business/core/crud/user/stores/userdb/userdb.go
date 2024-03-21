@@ -8,14 +8,14 @@ import (
 	"fmt"
 	"net/mail"
 
-	"github.com/google/uuid"
-	"github.com/jmoiron/sqlx"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user"
 	"github.com/shohinsan/SaleSphereAPI/business/data/sqldb"
 	"github.com/shohinsan/SaleSphereAPI/business/data/sqldb/dbarray"
 	"github.com/shohinsan/SaleSphereAPI/business/data/transaction"
-	"github.com/shohinsan/SaleSphereAPI/business/web/v1/order"
+	"github.com/shohinsan/SaleSphereAPI/business/web/order"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
+	"github.com/google/uuid"
+	"github.com/jmoiron/sqlx"
 )
 
 // Store manages the set of APIs for user database access.
@@ -161,7 +161,7 @@ func (s *Store) Count(ctx context.Context, filter user.QueryFilter) (int, error)
 		Count int `db:"count"`
 	}
 	if err := sqldb.NamedQueryStruct(ctx, s.log, s.db, buf.String(), data, &count); err != nil {
-		return 0, fmt.Errorf("namedquerystruct: %w", err)
+		return 0, fmt.Errorf("db: %w", err)
 	}
 
 	return count.Count, nil
@@ -186,9 +186,9 @@ func (s *Store) QueryByID(ctx context.Context, userID uuid.UUID) (user.User, err
 	var dbUsr dbUser
 	if err := sqldb.NamedQueryStruct(ctx, s.log, s.db, q, data, &dbUsr); err != nil {
 		if errors.Is(err, sqldb.ErrDBNotFound) {
-			return user.User{}, fmt.Errorf("namedquerystruct: %w", user.ErrNotFound)
+			return user.User{}, fmt.Errorf("db: %w", user.ErrNotFound)
 		}
-		return user.User{}, fmt.Errorf("namedquerystruct: %w", err)
+		return user.User{}, fmt.Errorf("db: %w", err)
 	}
 
 	return toCoreUser(dbUsr)
@@ -220,7 +220,7 @@ func (s *Store) QueryByIDs(ctx context.Context, userIDs []uuid.UUID) ([]user.Use
 		if errors.Is(err, sqldb.ErrDBNotFound) {
 			return nil, user.ErrNotFound
 		}
-		return nil, fmt.Errorf("namedquerystruct: %w", err)
+		return nil, fmt.Errorf("db: %w", err)
 	}
 
 	return toCoreUserSlice(dbUsrs)
@@ -245,9 +245,9 @@ func (s *Store) QueryByEmail(ctx context.Context, email mail.Address) (user.User
 	var dbUsr dbUser
 	if err := sqldb.NamedQueryStruct(ctx, s.log, s.db, q, data, &dbUsr); err != nil {
 		if errors.Is(err, sqldb.ErrDBNotFound) {
-			return user.User{}, fmt.Errorf("namedquerystruct: %w", user.ErrNotFound)
+			return user.User{}, fmt.Errorf("db: %w", user.ErrNotFound)
 		}
-		return user.User{}, fmt.Errorf("namedquerystruct: %w", err)
+		return user.User{}, fmt.Errorf("db: %w", err)
 	}
 
 	return toCoreUser(dbUsr)

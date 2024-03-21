@@ -5,10 +5,6 @@ metadata:
   namespace: sales-system
 
 spec:
-  selector:
-    matchLabels:
-      app: sales
-      
   replicas: 1
 
   strategy:
@@ -141,3 +137,10 @@ spec:
           limits:
             cpu: "250m"     # Execute instructions 25ms/100ms on one core
             memory: "36Mi"  # Match the requests value
+
+      - name: metrics
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "100m"

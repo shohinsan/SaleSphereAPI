@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/shohinsan/SaleSphereAPI/business/web/v1/order"
+	"github.com/shohinsan/SaleSphereAPI/business/web/order"
 )
 
 // Storer interface declares the behavior this package needs to perists and

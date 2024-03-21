@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"text/template"
 
-	"github.com/go-json-experiment/json"
 	"github.com/shohinsan/SaleSphereAPI/app/tooling/docs/webapi"
+	"github.com/go-json-experiment/json"
 )
 
 //go:embed template.txt

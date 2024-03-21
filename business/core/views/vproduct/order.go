@@ -1,6 +1,6 @@
 package vproduct
 
-import "github.com/shohinsan/SaleSphereAPI/business/web/v1/order"
+import "github.com/shohinsan/SaleSphereAPI/business/web/order"
 
 // DefaultOrderBy represents the default way we sort.
 var DefaultOrderBy = order.NewBy(OrderByProductID, order.ASC)

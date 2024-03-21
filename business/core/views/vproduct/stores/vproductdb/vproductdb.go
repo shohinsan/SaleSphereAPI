@@ -6,11 +6,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/jmoiron/sqlx"
 	"github.com/shohinsan/SaleSphereAPI/business/core/views/vproduct"
 	"github.com/shohinsan/SaleSphereAPI/business/data/sqldb"
-	"github.com/shohinsan/SaleSphereAPI/business/web/v1/order"
+	"github.com/shohinsan/SaleSphereAPI/business/web/order"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
+	"github.com/jmoiron/sqlx"
 )
 
 // Store manages the set of APIs for product view database access.
@@ -83,7 +83,7 @@ func (s *Store) Count(ctx context.Context, filter vproduct.QueryFilter) (int, er
 		Count int `db:"count"`
 	}
 	if err := sqldb.NamedQueryStruct(ctx, s.log, s.db, buf.String(), data, &count); err != nil {
-		return 0, fmt.Errorf("namedquerystruct: %w", err)
+		return 0, fmt.Errorf("db: %w", err)
 	}
 
 	return count.Count, nil

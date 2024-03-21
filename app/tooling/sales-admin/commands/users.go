@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/go-json-experiment/json"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user/stores/userdb"
 	"github.com/shohinsan/SaleSphereAPI/business/data/sqldb"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
+	"github.com/go-json-experiment/json"
 )
 
 // Users retrieves all users from the database.

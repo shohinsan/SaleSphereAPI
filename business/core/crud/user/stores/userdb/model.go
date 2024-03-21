@@ -6,9 +6,9 @@ import (
 	"net/mail"
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user"
 	"github.com/shohinsan/SaleSphereAPI/business/data/sqldb/dbarray"
+	"github.com/google/uuid"
 )
 
 type dbUser struct {

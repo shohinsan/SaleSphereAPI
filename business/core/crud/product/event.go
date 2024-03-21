@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/go-json-experiment/json"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/delegate"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user"
+	"github.com/go-json-experiment/json"
 )
 
 // registerDelegateFunctions will register action functions with the delegate

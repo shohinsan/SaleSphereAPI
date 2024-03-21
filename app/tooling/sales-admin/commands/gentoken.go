@@ -6,14 +6,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/golang-jwt/jwt/v4"
-	"github.com/google/uuid"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user/stores/userdb"
 	"github.com/shohinsan/SaleSphereAPI/business/data/sqldb"
-	"github.com/shohinsan/SaleSphereAPI/business/web/v1/auth"
+	"github.com/shohinsan/SaleSphereAPI/business/web/auth"
 	"github.com/shohinsan/SaleSphereAPI/foundation/keystore"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
+	"github.com/golang-jwt/jwt/v4"
+	"github.com/google/uuid"
 )
 
 // GenToken generates a JWT for the specified user.

@@ -145,17 +145,11 @@ METRICS_IMAGE   := $(BASE_IMAGE_NAME)/$(SERVICE_NAME)-metrics:$(VERSION)
 
 # VERSION       := "0.0.1-$(shell git rev-parse --short HEAD)"
 
-
-# ==============================================================================
-# Other
-
-dangling:
-	docker image prune -f
-
 # ==============================================================================
 # Install dependencies
 
 dev-gotooling:
+	go install golang.org/x/tools/cmd/gonew@latest
 	go install github.com/divan/expvarmon@latest
 	go install github.com/rakyll/hey@latest
 	go install honnef.co/go/tools/cmd/staticcheck@latest
@@ -189,7 +183,6 @@ all: service metrics
 service:
 	docker build \
 		-f zarf/docker/dockerfile.service \
-		--platform=linux/amd64 \
 		-t $(SERVICE_IMAGE) \
 		--build-arg BUILD_REF=$(VERSION) \
 		--build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
@@ -198,7 +191,6 @@ service:
 metrics:
 	docker build \
 		-f zarf/docker/dockerfile.metrics \
-		--platform=linux/amd64 \
 		-t $(METRICS_IMAGE) \
 		--build-arg BUILD_REF=$(VERSION) \
 		--build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
@@ -384,13 +376,6 @@ test: test-only lint vuln-check
 
 test-race: test-race lint vuln-check
 
-go-unit:
-	app/services/sales-api/v1/tests && go test -v
-
-go-integration:
-	cd business/core/tests && go test -v
-
-
 # ==============================================================================
 # Hitting endpoints
 
@@ -466,8 +451,6 @@ ready:
 live:
 	curl -il http://localhost:3000/v1/liveness
 
-
-
 curl-create:
 	curl -il -X POST \
 	-H "Authorization: Bearer ${TOKEN}" \
@@ -483,7 +466,7 @@ talk-up:
 		--image $(KIND) \
 		--name $(KIND_CLUSTER) \
 		--config zarf/k8s/dev/kind-config.yaml
-		
+
 	kubectl wait --timeout=120s --namespace=local-path-storage --for=condition=Available deployment/local-path-provisioner
 
 	kind load docker-image $(POSTGRES) --name $(KIND_CLUSTER)	
@@ -537,3 +520,7 @@ admin-gui-start-build: admin-gui-build
 	pnpm -C ${ADMIN_FRONTEND_PREFIX} run preview 
 
 admin-gui-run: write-token-to-env admin-gui-start-build
+
+gonew:
+	$HOME/go/bin/gonew {github.com/template_repo} {github.com/your_repo}
+

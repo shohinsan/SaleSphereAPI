@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/shohinsan/SaleSphereAPI/business/core/{{.DomainL}}"
-	"github.com/shohinsan/SaleSphereAPI/business/web/v1/order"
+	"github.com/shohinsan/SaleSphereAPI/business/web/order"
 	"github.com/shohinsan/SaleSphereAPI/foundation/validate"
 )
 

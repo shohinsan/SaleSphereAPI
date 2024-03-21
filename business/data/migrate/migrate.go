@@ -11,8 +11,8 @@ import (
 	"github.com/ardanlabs/darwin/v3"
 	"github.com/ardanlabs/darwin/v3/dialects/postgres"
 	"github.com/ardanlabs/darwin/v3/drivers/generic"
-	"github.com/jmoiron/sqlx"
 	"github.com/shohinsan/SaleSphereAPI/business/data/sqldb"
+	"github.com/jmoiron/sqlx"
 )
 
 var (
