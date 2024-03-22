@@ -9,12 +9,12 @@ import (
 	"testing"
 	"time"
 
+	"github.com/google/go-cmp/cmp"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/product"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user"
 	"github.com/shohinsan/SaleSphereAPI/business/data/dbtest"
 	"github.com/shohinsan/SaleSphereAPI/business/data/sqldb"
 	"github.com/shohinsan/SaleSphereAPI/business/data/transaction"
-	"github.com/google/go-cmp/cmp"
 )
 
 func Test_Product(t *testing.T) {
@@ -43,16 +43,16 @@ func productCrud(t *testing.T) {
 
 	// -------------------------------------------------------------------------
 
-	test := dbtest.NewTest(t, c, "Test_Product/crud")
+	dbTest := dbtest.NewTest(t, c, "Test_Product/crud")
 	defer func() {
 		if r := recover(); r != nil {
 			t.Log(r)
 			t.Error(string(debug.Stack()))
 		}
-		test.Teardown()
+		dbTest.Teardown()
 	}()
 
-	api := test.CoreAPIs
+	api := dbTest.CoreAPIs
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()

@@ -353,6 +353,9 @@ metrics-view:
 grafana:
 	open -a "Google Chrome" http://localhost:3100/
 
+jaeger:
+	open -a "Google Chrome" http://localhost:16686/
+
 statsviz:
 	open -a "Google Chrome" http://localhost:4000/debug/statsviz
 

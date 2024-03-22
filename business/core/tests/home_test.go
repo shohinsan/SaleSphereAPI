@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/google/go-cmp/cmp"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/home"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/user"
 	"github.com/shohinsan/SaleSphereAPI/business/data/dbtest"
-	"github.com/google/go-cmp/cmp"
 )
 
 func Test_Home(t *testing.T) {
@@ -39,17 +39,17 @@ func homeCrud(t *testing.T) {
 
 	// ---------------------------------------------------------------------------
 
-	test := dbtest.NewTest(t, c, "Test_Home/crud")
+	dbTest := dbtest.NewTest(t, c, "Test_Home/crud")
 
 	defer func() {
 		if r := recover(); r != nil {
 			t.Log(r)
 			t.Error(string(debug.Stack()))
 		}
-		test.Teardown()
+		dbTest.Teardown()
 	}()
 
-	api := test.CoreAPIs
+	api := dbTest.CoreAPIs
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()

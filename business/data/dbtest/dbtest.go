@@ -10,6 +10,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/golang-jwt/jwt/v4"
+	"github.com/jmoiron/sqlx"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/delegate"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/home"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/home/stores/homedb"
@@ -25,8 +27,6 @@ import (
 	"github.com/shohinsan/SaleSphereAPI/foundation/docker"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
 	"github.com/shohinsan/SaleSphereAPI/foundation/web"
-	"github.com/golang-jwt/jwt/v4"
-	"github.com/jmoiron/sqlx"
 )
 
 // StartDB starts a database instance.

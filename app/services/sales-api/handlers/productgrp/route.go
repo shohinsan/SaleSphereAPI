@@ -3,6 +3,7 @@ package productgrp
 import (
 	"net/http"
 
+	"github.com/jmoiron/sqlx"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/delegate"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/product"
 	"github.com/shohinsan/SaleSphereAPI/business/core/crud/product/stores/productdb"
@@ -13,7 +14,6 @@ import (
 	"github.com/shohinsan/SaleSphereAPI/business/web/mid"
 	"github.com/shohinsan/SaleSphereAPI/foundation/logger"
 	"github.com/shohinsan/SaleSphereAPI/foundation/web"
-	"github.com/jmoiron/sqlx"
 )
 
 // Config contains all the mandatory systems required by handlers.
@@ -36,7 +36,7 @@ func Routes(app *web.App, cfg Config) {
 	ruleUserOnly := mid.Authorize(cfg.Auth, auth.RuleUserOnly)
 	ruleAuthorizeProduct := mid.AuthorizeProduct(cfg.Auth, prdCore)
 
-	hdl := new(prdCore, usrCore)
+	hdl := new(prdCore)
 	app.Handle(http.MethodGet, version, "/products", hdl.query, authen, ruleAny)
 	app.Handle(http.MethodGet, version, "/products/{product_id}", hdl.queryByID, authen, ruleAuthorizeProduct)
 	app.Handle(http.MethodPost, version, "/products", hdl.create, authen, ruleUserOnly)
